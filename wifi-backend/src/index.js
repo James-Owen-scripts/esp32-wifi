@@ -1,8 +1,14 @@
 const axios = require('axios');
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
+const corsObj = {
+    origin: "*",
+    methods: ['GET', 'POST'],
+    credentials: true,
+};
 
 async function getHumAndTemp() {
     let data = {};
@@ -18,6 +24,7 @@ async function getHumAndTemp() {
 }
 
 // express code
+app.use(cors(corsObj));
 app.use(express.json());
 
 app.get('/status', async (_req, res) => {
